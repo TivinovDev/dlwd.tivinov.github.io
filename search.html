@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm kiếm bằng Regex</title>
+</head>
+<body>
+    <h1>Tìm kiếm bằng Regex</h1>
+    <input type="text" id="searchBox" placeholder="Search with regex...">
+    <ul id="resultList">
+        <li>Windows 8.1</li>
+        <li>Windows 10 22H2</li>
+        <li>Windows 11 24H2</li>
+        <li>Office 2021</li>
+    </ul>
+
+    <script>
+    document.getElementById("searchBox").addEventListener("input", function() {
+        let regexPattern = this.value;
+        try {
+            let regex = new RegExp(regexPattern, "i"); // Không phân biệt hoa thường
+            document.querySelectorAll("#resultList li").forEach(item => {
+                item.style.display = regex.test(item.textContent) ? "" : "none";
+            });
+        } catch (e) {
+            console.error("Regex không hợp lệ:", e);
+        }
+    });
+    </script>
+</body>
+</html>
